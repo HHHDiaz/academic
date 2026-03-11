@@ -51,7 +51,7 @@ docker run -d \
 ## 2. Clonar e instalar dependencias
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/omarmus/academic-ddd.git
 cd academic-ddd
 
 # Instalar dependencias de todos los paquetes (workspaces)
@@ -180,6 +180,30 @@ npm run build
 # Tests de todos los workspaces
 npm run test
 ```
+
+---
+
+## Coverage (cobertura de código)
+
+**Backend** (Jest):
+
+```bash
+cd packages/backend
+npm run test:cov
+```
+
+Genera el reporte en `packages/backend/coverage/` (HTML en `coverage/index.html`, más salida `text`/`text-summary`/`lcov` en consola).
+
+**Frontend** (Vitest + v8):
+
+```bash
+cd packages/frontend
+npm run test:coverage
+```
+
+Genera el reporte en `packages/frontend/coverage/` (HTML y formatos `text`, `text-summary`, `lcov`).
+
+La carpeta `coverage` está en `.gitignore`.
 
 ---
 
