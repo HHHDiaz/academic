@@ -1,6 +1,17 @@
+import { useEffect } from 'react';
+import { trackEvent, trackPageView } from '../../../lib/analytics';
 import { MainLayout } from '../../templates/MainLayout';
 
 export function CursosPage() {
+
+  useEffect(() => {
+    trackPageView("/courses", "Cursos");
+  }, []);
+
+  trackEvent("click_course", {
+    course_name: "Curso de DDD",
+  });
+
   return (
     <MainLayout>
       <div className="rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm ring-1 ring-slate-200/50 dark:border-slate-600 dark:bg-slate-800/95 dark:ring-slate-600/50 sm:p-10">

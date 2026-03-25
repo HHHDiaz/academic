@@ -33,13 +33,13 @@ export function initAnalytics() {
     });
   }
 
-  if (MIXPANEL_TOKEN && !mixpanelInited) {
-    mixpanel.init(MIXPANEL_TOKEN, {
-      track_pageview: false,
-      persistence: 'localStorage',
-    });
-    mixpanelInited = true;
-  }
+  if (MIXPANEL_TOKEN) {
+  mixpanel.init(MIXPANEL_TOKEN, {
+    debug: true,
+    track_pageview: true,
+    persistence: "localStorage"
+  });
+}
 }
 
 export function trackPageView(path: string, title?: string) {
@@ -61,21 +61,13 @@ export function trackPageView(path: string, title?: string) {
   }
 }
 
-export function trackEvent(
-  action: string,
-  params?: Record<string, string | number | boolean | null | undefined>,
-) {
-  if (typeof window === 'undefined') return;
 
-  if (GA_MEASUREMENT_ID && window.gtag) {
-    window.gtag('event', action, {
-      ...params,
-      send_to: GA_MEASUREMENT_ID,
-    });
+export const trackEvent = (event: string, data?: any) => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", event, data);
   }
 
-  if (MIXPANEL_TOKEN && mixpanelInited) {
-    mixpanel.track(action, params ?? {});
+  if (mixpanel) {
+    mixpanel.track(event, data);
   }
-}
-
+};
